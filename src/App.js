@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ToDoList from "./components/ToDoList";
 import SignIn from "./components/SignIn";
+import Channel from "./components/Channel";
 import requireAuth from "./components/auth/requireAuth";
 import { BrowserRouter, Route } from "react-router-dom";
 import { connect } from "react-redux";
@@ -17,6 +18,7 @@ class App extends Component {
         <div className="container">
           <Route exact path="/" component={SignIn} />
           <Route path="/app" component={requireAuth(ToDoList)} />
+          <Route path="/channel" component={Channel} />
         </div>
       </BrowserRouter>
     );
