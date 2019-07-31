@@ -1,7 +1,11 @@
 {
-  "name": "react-redux-firebase",
+  "name": "ping-me-client",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "8.16.0",
+    "npm": "6.4.1"
+  },
   "dependencies": {
     "firebase": "^4.12.0",
     "lodash": "^4.17.5",
