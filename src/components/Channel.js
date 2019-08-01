@@ -2,34 +2,19 @@ import './Channel.css'
 import React, { Component } from "react";
 import {
     Container,
-    Divider,
-    Dropdown,
     Grid,
     Header,
     Button,
     Label,
-    Icon,
-    Item,
-    Image,
-    List,
-    Menu,
-    Segment,
 } from 'semantic-ui-react'
 import { connect } from "react-redux";
+import Layout from './Layout';
 
 class Channel extends Component {
 
   render() {
     return (
-        <div>
-        <Menu fixed='top'>
-          <Container>
-            <Menu.Item as='a' header>
-              {/* <Image size='mini' src='/public/img/nothing.png' style={{ marginRight: '1.5em' }} /> */}
-              ping me
-            </Menu.Item>    
-          </Container>
-        </Menu>
+      <Layout>
         <Container>
           <div className="header-image">
           </div>
@@ -48,10 +33,9 @@ class Channel extends Component {
             <Button color={"teal"} size={"big"} fluid>I'd like to Register</Button>
           </Grid.Column>
           </Grid>
-        </Container>
-      </div>
-    
-    );
+        </Container>    
+      </Layout>
+    )
   }
 }
 
