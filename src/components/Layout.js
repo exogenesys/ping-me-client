@@ -1,4 +1,4 @@
-import './Channel.css'
+import './Layout.css'
 import React, { Component } from "react";
 import {
     Container,
@@ -30,9 +30,11 @@ class Layout extends Component {
     const { children } = this.props
 
     return (
-        <div>
+        <div className={'site'}>
         <TopBar/>
-        {children}
+        <div className={'site-content'}>
+          {children}
+        </div>
         <Footer />
         </div>
     )
