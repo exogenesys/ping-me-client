@@ -1,25 +1,11 @@
 import './Layout.css'
 import React, { Component } from "react";
-import {
-    Container,
-    Grid,
-    Header,
-    Button,
-    Label,
-    Divider,
-    Icon,
-    Image,
-    List,
-    Menu,
-    Responsive,
-    Segment,
-    Sidebar,
-    Visibility,
-} from 'semantic-ui-react'
 import TopBar from './TopBar'
 import Footer from './Footer'
+import SignInModal from './SignInModal'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
+
 
 class Layout extends Component {
 
@@ -29,10 +15,12 @@ class Layout extends Component {
   render() {
     const { children } = this.props
 
+
     return (
         <div className={'site'}>
-        <TopBar/>
         <div className={'site-content'}>
+          <TopBar />
+          <SignInModal />
           {children}
         </div>
         <Footer />
@@ -45,10 +33,11 @@ Layout.propTypes = {
   children: PropTypes.node,
 }
 
-const mapStateToProps = ({ auth }) => {
-  return {
+function mapStateToProps({ auth, signUpModal }) {
+  return { 
     auth
   };
-};
+}
 
-export default Layout;
+
+export default connect(mapStateToProps, null)(Layout);

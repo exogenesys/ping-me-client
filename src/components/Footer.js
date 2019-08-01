@@ -9,18 +9,18 @@ import {
 
 const Footer = () => {
     return(
-        <Segment inverted vertical style={{ padding: '5em 0em' }}>
+        <Segment vertical style={{ padding: '5em 0em' }}>
         <Container>
-        <Grid divided inverted stackable>
+        <Grid divided stackable>
             <Grid.Row>
             <Grid.Column width={3}>
-                <Header inverted as='h4' content='Support' />
-                <List link inverted>
-                <List.Item as='a'>Mail Us</List.Item>
+                <Header as='h4' content='Support' />
+                <List link>
+                <List.Item as='a' href={"mailto:support@pingme.cf"}>Mail Us</List.Item>
                 </List>
             </Grid.Column>
             <Grid.Column width={7}>
-                <Header as='h4' inverted>
+                <Header as='h4'>
                 &copy; 2019 Ping Me
                 </Header>
                 <p>

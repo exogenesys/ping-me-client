@@ -1,5 +1,5 @@
 import { todosRef, authRef, provider } from "../config/firebase";
-import { FETCH_TODOS, FETCH_USER } from "./types";
+import { FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL } from "./types";
 
 export const addToDo = (newToDo, uid) => async dispatch => {
   todosRef
@@ -59,3 +59,17 @@ export const signOut = () => dispatch => {
       console.log(error);
     });
 };
+
+export const openSignUpModal = () => dispatch => {
+  dispatch({
+    type: OPEN_SIGN_UP_MODAL,
+    payload: true
+  })
+}
+
+export const closeSignUpModal = () => dispatch => {
+  dispatch({
+    type: OPEN_SIGN_UP_MODAL,
+    payload: false
+  })  
+}

@@ -2,19 +2,10 @@ import './Home.css'
 import React, { Component } from "react";
 import {
     Container,
-    Grid,
     Header,
     Button,
-    Label,
-    Divider,
     Icon,
-    Image,
-    List,
-    Menu,
-    Responsive,
     Segment,
-    Sidebar,
-    Visibility,
 } from 'semantic-ui-react'
 import Layout from './Layout'
 import PropTypes from 'prop-types'
