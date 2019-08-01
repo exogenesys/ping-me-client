@@ -8,24 +8,21 @@ import PropTypes from 'prop-types'
 
 
 class TopBar extends Component {
-
     static contextTypes = {
-        router: PropTypes.object
-      };
-    
-      componentWillUpdate(nextProps) {
-        if (nextProps.auth) {
-          this.context.router.history.push("/");
-        }
-      }
+      router: PropTypes.object
+    };
+
+    goToHome() {
+      this.context.router.history.push("/");      
+    }
 
     render(){
         return(
             <Menu fixed='top'>
             <Container>
-            <Menu.Item as='a' header>
+            <Menu.Item as='a' header onClick={() => this.goToHome()}>
                 {/* <Image size='mini' src='/public/img/nothing.png' style={{ marginRight: '1.5em' }} /> */}
-                ping me
+                Ping Me
             </Menu.Item>    
             </Container>
             </Menu>    
