@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import ToDoList from "./components/ToDoList";
-import SignIn from "./components/SignIn";
-import Channel from "./components/Channel";
-import Home from "./components/Home";
-import requireAuth from "./components/auth/requireAuth";
-import { BrowserRouter, Route } from "react-router-dom";
-import { connect } from "react-redux";
-import { fetchUser } from "./actions";
+import React, { Component } from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
+import ToDoList from './components/ToDoList';
+import SignIn from './components/SignIn';
+import Channel from './components/Channel';
+import Home from './components/Home';
+import requireAuth from './components/auth/requireAuth';
+import { fetchUser } from './actions';
 
 class App extends Component {
   componentWillMount() {

@@ -1,75 +1,77 @@
-import { todosRef, authRef, provider } from "../config/firebase";
-import { FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL } from "./types";
+import { todosRef, authRef, provider } from '../config/firebase';
+import {
+  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL,
+} from './types';
 
-export const addToDo = (newToDo, uid) => async dispatch => {
+export const addToDo = (newToDo, uid) => async () => {
   todosRef
     .child(uid)
     .push()
     .set(newToDo);
 };
 
-export const completeToDo = (completeToDoId, uid) => async dispatch => {
+export const completeToDo = (completeToDoId, uid) => async () => {
   todosRef
     .child(uid)
     .child(completeToDoId)
     .remove();
 };
 
-export const fetchToDos = uid => async dispatch => {
-  todosRef.child(uid).on("value", snapshot => {
+export const fetchToDos = uid => async (dispatch) => {
+  todosRef.child(uid).on('value', (snapshot) => {
     dispatch({
       type: FETCH_TODOS,
-      payload: snapshot.val()
+      payload: snapshot.val(),
     });
   });
 };
 
-export const fetchUser = () => dispatch => {
-  authRef.onAuthStateChanged(user => {
+export const fetchUser = () => (dispatch) => {
+  authRef.onAuthStateChanged((user) => {
     if (user) {
       dispatch({
         type: FETCH_USER,
-        payload: user
+        payload: user,
       });
     } else {
       dispatch({
         type: FETCH_USER,
-        payload: null
+        payload: null,
       });
     }
   });
 };
 
-export const signIn = () => dispatch => {
+export const signIn = () => () => {
   authRef
     .signInWithPopup(provider)
-    .then(result => {})
-    .catch(error => {
+    .then(() => {})
+    .catch((error) => {
       console.log(error);
     });
 };
 
-export const signOut = () => dispatch => {
+export const signOut = () => () => {
   authRef
     .signOut()
     .then(() => {
       // Sign-out successful.
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 };
 
-export const openSignUpModal = () => dispatch => {
+export const openSignUpModal = () => (dispatch) => {
   dispatch({
     type: OPEN_SIGN_UP_MODAL,
-    payload: true
-  })
-}
+    payload: true,
+  });
+};
 
-export const closeSignUpModal = () => dispatch => {
+export const closeSignUpModal = () => (dispatch) => {
   dispatch({
-    type: OPEN_SIGN_UP_MODAL,
-    payload: false
-  })  
-}
+    type: CLOSE_SIGN_UP_MODAL,
+    payload: false,
+  });
+};

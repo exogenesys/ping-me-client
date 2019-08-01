@@ -1,4 +1,4 @@
-import { CLOSE_SIGN_UP_MODAL, OPEN_SIGN_UP_MODAL } from "../actions/types";
+import { CLOSE_SIGN_UP_MODAL, OPEN_SIGN_UP_MODAL } from '../actions/types';
 
 export default (state = false, action) => {
   switch (action.type) {
