@@ -1,6 +1,6 @@
-import { todosRef, authRef, provider } from '../config/firebase';
+import { todosRef, authRef, provider, subscribeTo } from '../config/firebase';
 import {
-  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL,
+  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION
 } from './types';
 
 export const addToDo = (newToDo, uid) => async () => {
@@ -75,3 +75,25 @@ export const closeSignUpModal = () => (dispatch) => {
     payload: false,
   });
 };
+
+export const subscribeChannel = (channelId) => async (dispatch) => {
+  dispatch({
+    type: WAIT_SUBSCRIPTION,
+    payload: 'loading'
+  })
+  subscribeTo({
+    channelId: channelId,
+  }).then((result) => {
+    if(!result.error){
+      dispatch({
+        type: COMPLETE_SUBSCRIPTION,
+        payload: 'complete'
+      })
+    } else {
+      dispatch({
+        type: REPORT_ERROR_SUBSCRIPTION,
+        payload: 'failed'
+      })
+    }
+  })
+}
