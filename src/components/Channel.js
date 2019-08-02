@@ -10,7 +10,7 @@ import {
 import { connect } from 'react-redux';
 import Layout from './Layout';
 import SignInModal from './SignInModal';
-import { openSignUpModal, subscribeChannel } from '../actions';
+import { openSignUpModal, subscribeChannel, unSubscribeChannel } from '../actions';
 
 class Channel extends Component {
   constructor(props) {
@@ -22,7 +22,11 @@ class Channel extends Component {
     const channelId = 'exhibitions-at-pragati-maidan'
 
     if (this.props.auth) {
-      this.props.subscribeChannel(channelId, this.props.auth.email);
+      if(this.props.subscription == 'ready' || !this.props.subscription){
+        this.props.subscribeChannel(channelId);
+      } else if (this.props.subscription == 'complete'){
+        this.props.unSubscribeChannel(channelId); 
+      }
     } else {
       this.props.openSignUpModal();
     }
@@ -44,7 +48,7 @@ class Channel extends Component {
       ButtonText = 'Something went wrong. Retry!'
       ButtonColor = 'red'
       ButtonLoading = false
-    } else {
+    } else if (this.props.subscription == 'ready'|| !this.props.subscription){
       ButtonText = "Subscribe to Notifications"
       ButtonColor = 'teal'
       ButtonLoading = false
@@ -80,4 +84,4 @@ const mapStateToProps = ({ auth, subscription }) => ({
   subscription
 });
 
-export default connect(mapStateToProps, { openSignUpModal, subscribeChannel })(Channel);
+export default connect(mapStateToProps, { openSignUpModal, subscribeChannel, unSubscribeChannel })(Channel);
