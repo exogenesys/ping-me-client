@@ -19,7 +19,7 @@ class Channel extends Component {
 
 
   handleRegister() {
-    const channelId = 'exhibitions-at-pragati-maidan'
+    const channelId = 't9NNVbV2uBnMbLl1ZDIj'
 
     if (this.props.auth) {
       if(this.props.subscription == 'ready' || !this.props.subscription){
