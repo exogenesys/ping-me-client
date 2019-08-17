@@ -7,8 +7,8 @@ export default function(ComposedComponent) {
     static contextTypes = {
       router: PropTypes.object
     };
-
-    componentWillMount() {
+    constructor(props) {
+      super(props);
       if (this.props.authenticated === null) {
         this.context.router.history.push("/");
       }

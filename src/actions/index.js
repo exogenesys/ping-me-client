@@ -90,31 +90,40 @@ export const closeSignUpModal = () => (dispatch) => {
   });
 };
 
-export const getChannelState = channelId => (dispatch) => {
+export const getChannelState = (channelId, isUserAuthenticated = null) => (dispatch) => {
   dispatch({
     type: WAIT_SUBSCRIPTION,
     payload: 'loading',
   });
-  getSubscriptionData({
-    channelId,
-  }).then((result) => {
-    if (!result.data.error && result.data.message === 'subscribed') {
-      dispatch({
-        type: COMPLETE_SUBSCRIPTION,
-        payload: 'complete',
-      });
-    } else if (!result.data.error && result.data.message === 'not subscribed') {
-      dispatch({
-        type: NOT_SUBSCRIBED,
-        payload: 'ready',
-      });
-    } else {
-      dispatch({
-        type: REPORT_ERROR_SUBSCRIPTION,
-        payload: 'failed',
-      });
-    }
-  });
+
+  if(isUserAuthenticated){
+    getSubscriptionData({
+      channelId,
+    }).then((result) => {
+      if (!result.data.error && result.data.message === 'subscribed') {
+        dispatch({
+          type: COMPLETE_SUBSCRIPTION,
+          payload: 'complete',
+        });
+      } else if (!result.data.error && result.data.message === 'not subscribed') {
+        dispatch({
+          type: NOT_SUBSCRIBED,
+          payload: 'ready',
+        });
+      } else {
+        dispatch({
+          type: REPORT_ERROR_SUBSCRIPTION,
+          payload: 'failed',
+        });
+      }
+    });
+  } else {
+    dispatch({
+      type: NOT_SUBSCRIBED,
+      payload: 'ready',
+    });
+  }
+
 };
 
 export const subscribeChannel = channelId => async (dispatch) => {

@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import ToDoList from './components/ToDoList';
-import SignIn from './components/SignIn';
 import Channel from './components/Channel';
 import Home from './components/Home';
 import requireAuth from './components/auth/requireAuth';
 import { fetchUser } from './actions';
 
 class App extends Component {
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     this.props.fetchUser();
   }
 
@@ -18,9 +17,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Route exact path="/" component={Home} />
-          <Route path="/login" component={SignIn} />
-          <Route path="/channel/exhibitions-at-pragati-maidan" component={Channel} />
-          <Route path="/app" component={requireAuth(ToDoList)} />
+          <Route path="/channel/exhibitions-at-pragati-maidan" component={Channel}/>
+          {/* <Route path="/app" component={requireAuth(ToDoList)} /> */}
         </div>
       </BrowserRouter>
     );
