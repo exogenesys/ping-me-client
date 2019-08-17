@@ -9,5 +9,5 @@ export default combineReducers({
   data,
   auth,
   signUpModal,
-  subscription
+  subscription,
 });

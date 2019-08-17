@@ -9,7 +9,9 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Layout from './Layout';
-import { openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState } from '../actions';
+import {
+  openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState,
+} from '../actions';
 
 class Channel extends Component {
   constructor(props) {
@@ -18,44 +20,48 @@ class Channel extends Component {
 
 
   handleRegister() {
-    const channelId = 't9NNVbV2uBnMbLl1ZDIj'
+    const channelId = 't9NNVbV2uBnMbLl1ZDIj';
 
     if (this.props.auth) {
-      if(this.props.subscription == 'ready' || !this.props.subscription){
+      if (this.props.subscription == 'ready' || !this.props.subscription) {
         this.props.subscribeChannel(channelId);
-      } else if (this.props.subscription == 'complete'){
-        this.props.unSubscribeChannel(channelId); 
+      } else if (this.props.subscription == 'complete') {
+        this.props.unSubscribeChannel(channelId);
       }
     } else {
       this.props.openSignUpModal();
     }
   }
 
-  componentWillMount(){
-    const channelId = 't9NNVbV2uBnMbLl1ZDIj'
-    this.props.getChannelState(channelId);
+  componentWillMount() {
+    const channelId = 't9NNVbV2uBnMbLl1ZDIj';
+    if (this.props.auth) {
+      this.props.getChannelState(channelId);
+    } else {
+
+    }
   }
 
 
   render() {
-
-    let ButtonText, ButtonColor, ButtonLoading
-    if(this.props.subscription == 'complete'){
-      ButtonText = 'Cancel Subscription'
-      ButtonColor = 'pink'
-      ButtonLoading = false
-    } else if (this.props.subscription == 'loading'){
-      ButtonText = 'Please Wait...'
-      ButtonColor = 'grey'
-      ButtonLoading = true
-    } else if (this.props.subscription == 'error'){
-      ButtonText = 'Something went wrong. Retry!'
-      ButtonColor = 'red'
-      ButtonLoading = false
-    } else if (this.props.subscription == 'ready'|| !this.props.subscription){
-      ButtonText = "Subscribe to Notifications"
-      ButtonColor = 'teal'
-      ButtonLoading = false
+    let ButtonText; let ButtonColor; let
+      ButtonLoading;
+    if (this.props.subscription == 'complete') {
+      ButtonText = 'Cancel Subscription';
+      ButtonColor = 'pink';
+      ButtonLoading = false;
+    } else if (this.props.subscription == 'loading') {
+      ButtonText = 'Please Wait...';
+      ButtonColor = 'grey';
+      ButtonLoading = true;
+    } else if (this.props.subscription == 'error') {
+      ButtonText = 'Something went wrong. Retry!';
+      ButtonColor = 'red';
+      ButtonLoading = false;
+    } else if (this.props.subscription == 'ready' || !this.props.subscription) {
+      ButtonText = 'Subscribe to Notifications';
+      ButtonColor = 'teal';
+      ButtonLoading = false;
     }
 
     return (
@@ -85,7 +91,9 @@ class Channel extends Component {
 
 const mapStateToProps = ({ auth, subscription }) => ({
   auth,
-  subscription
+  subscription,
 });
 
-export default connect(mapStateToProps, { openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState })(Channel);
+export default connect(mapStateToProps, {
+  openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState,
+})(Channel);

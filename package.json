@@ -9,7 +9,7 @@
   "dependencies": {
     "firebase": "^6.3.3",
     "lodash": "^4.17.15",
-    "materialize-css": "^1.0.0",
+    "noty": "^3.2.0-beta",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.1.0",

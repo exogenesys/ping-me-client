@@ -1,7 +1,11 @@
-import { todosRef, authRef, provider, subscribeTo, unSubscribeTo, getSubscriptionData } from '../config/firebase';
+import Noty from 'noty';
 import {
-  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED
+  todosRef, authRef, provider, subscribeTo, unSubscribeTo, getSubscriptionData,
+} from '../config/firebase';
+import {
+  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED,
 } from './types';
+import notyConfig from '../config/noty.config';
 
 export const addToDo = (newToDo, uid) => async () => {
   todosRef
@@ -45,7 +49,13 @@ export const fetchUser = () => (dispatch) => {
 export const signIn = () => () => {
   authRef
     .signInWithPopup(provider)
-    .then(() => {})
+    .then(() => {
+      new Noty({
+        ...notyConfig,
+        text: 'Hello, there!',
+        type: 'success',
+      }).show();
+    })
     .catch((error) => {
       console.log(error);
     });
@@ -55,7 +65,11 @@ export const signOut = () => () => {
   authRef
     .signOut()
     .then(() => {
-      // Sign-out successful.
+      new Noty({
+        ...notyConfig,
+        text: 'Succesfully logged out',
+        type: 'alert',
+      }).show();
     })
     .catch((error) => {
       console.log(error);
@@ -76,73 +90,93 @@ export const closeSignUpModal = () => (dispatch) => {
   });
 };
 
-export const getChannelState = (channelId) => (dispatch) => {
+export const getChannelState = channelId => (dispatch) => {
   dispatch({
     type: WAIT_SUBSCRIPTION,
-    payload: 'loading'
-  })
+    payload: 'loading',
+  });
   getSubscriptionData({
-    channelId
+    channelId,
   }).then((result) => {
-    if(!result.data.error && result.data.message === 'subscribed'){
+    if (!result.data.error && result.data.message === 'subscribed') {
       dispatch({
         type: COMPLETE_SUBSCRIPTION,
-        payload: 'complete'
-      })
-    } else if(!result.data.error && result.data.message === 'not subscribed'){
+        payload: 'complete',
+      });
+    } else if (!result.data.error && result.data.message === 'not subscribed') {
       dispatch({
         type: NOT_SUBSCRIBED,
-        payload: 'ready'
-      })
+        payload: 'ready',
+      });
     } else {
       dispatch({
         type: REPORT_ERROR_SUBSCRIPTION,
-        payload: 'failed'
-      })
+        payload: 'failed',
+      });
     }
-  })
-}
+  });
+};
 
-export const subscribeChannel = (channelId) => async (dispatch) => {
+export const subscribeChannel = channelId => async (dispatch) => {
   dispatch({
     type: WAIT_SUBSCRIPTION,
-    payload: 'loading'
-  })
+    payload: 'loading',
+  });
   subscribeTo({
-    channelId
+    channelId,
   }).then((result) => {
-    if(!result.error){
+    if (!result.error) {
+      new Noty({
+        ...notyConfig,
+        text: 'Channel Subscribed',
+        type: 'success',
+      }).show();
       dispatch({
         type: COMPLETE_SUBSCRIPTION,
-        payload: 'complete'
-      })
+        payload: 'complete',
+      });
     } else {
+      new Noty({
+        ...notyConfig,
+        text: 'Some Error Occured',
+        type: 'error',
+      }).show();
       dispatch({
         type: REPORT_ERROR_SUBSCRIPTION,
-        payload: 'failed'
-      })
+        payload: 'failed',
+      });
     }
-  })
-}
+  });
+};
 
-export const unSubscribeChannel = (channelId) => async (dispatch) => {
+export const unSubscribeChannel = channelId => async (dispatch) => {
   dispatch({
     type: WAIT_SUBSCRIPTION,
-    payload: 'loading'
-  })
+    payload: 'loading',
+  });
   unSubscribeTo({
-    channelId: channelId,
+    channelId,
   }).then((result) => {
-    if(!result.error){
+    if (!result.error) {
       dispatch({
         type: COMPLETE_SUBSCRIPTION,
-        payload: 'ready'
-      })
+        payload: 'ready',
+      });
+      new Noty({
+        ...notyConfig,
+        text: 'Channel Unsubscribed',
+        type: 'information',
+      }).show();
     } else {
+      new Noty({
+        ...notyConfig,
+        text: 'Some Error Occured',
+        type: 'error',
+      }).show();
       dispatch({
         type: REPORT_ERROR_SUBSCRIPTION,
-        payload: 'failed'
-      })
+        payload: 'failed',
+      });
     }
-  })
-}
+  });
+};
