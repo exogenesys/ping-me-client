@@ -35,7 +35,7 @@ constructor(props){
             <Button color="red" size="big" onClick={signIn}>
                 <Icon name="google" />
                 {' '}
-                Google Sign
+                Log In with Google
             </Button>
         </Modal.Actions>
       </Modal>

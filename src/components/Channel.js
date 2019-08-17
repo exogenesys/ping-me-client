@@ -61,7 +61,7 @@ class Channel extends Component {
       ButtonColor = 'red';
       ButtonLoading = false;
     } else if (this.props.subscription == 'ready' || !this.props.subscription) {
-      ButtonText = 'Subscribe to Notifications';
+      ButtonText = 'Click to Subscribe for Notifications';
       ButtonColor = 'teal';
       ButtonLoading = false;
     }
