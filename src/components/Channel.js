@@ -9,8 +9,7 @@ import {
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import Layout from './Layout';
-import SignInModal from './SignInModal';
-import { openSignUpModal, subscribeChannel, unSubscribeChannel } from '../actions';
+import { openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState } from '../actions';
 
 class Channel extends Component {
   constructor(props) {
@@ -30,6 +29,11 @@ class Channel extends Component {
     } else {
       this.props.openSignUpModal();
     }
+  }
+
+  componentWillMount(){
+    const channelId = 't9NNVbV2uBnMbLl1ZDIj'
+    this.props.getChannelState(channelId);
   }
 
 
@@ -84,4 +88,4 @@ const mapStateToProps = ({ auth, subscription }) => ({
   subscription
 });
 
-export default connect(mapStateToProps, { openSignUpModal, subscribeChannel, unSubscribeChannel })(Channel);
+export default connect(mapStateToProps, { openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState })(Channel);

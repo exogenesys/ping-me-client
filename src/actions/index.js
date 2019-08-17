@@ -1,6 +1,6 @@
-import { todosRef, authRef, provider, subscribeTo, unSubscribeTo } from '../config/firebase';
+import { todosRef, authRef, provider, subscribeTo, unSubscribeTo, getSubscriptionData } from '../config/firebase';
 import {
-  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION
+  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED
 } from './types';
 
 export const addToDo = (newToDo, uid) => async () => {
@@ -76,13 +76,40 @@ export const closeSignUpModal = () => (dispatch) => {
   });
 };
 
+export const getChannelState = (channelId) => (dispatch) => {
+  dispatch({
+    type: WAIT_SUBSCRIPTION,
+    payload: 'loading'
+  })
+  getSubscriptionData({
+    channelId
+  }).then((result) => {
+    if(!result.data.error && result.data.message === 'subscribed'){
+      dispatch({
+        type: COMPLETE_SUBSCRIPTION,
+        payload: 'complete'
+      })
+    } else if(!result.data.error && result.data.message === 'not subscribed'){
+      dispatch({
+        type: NOT_SUBSCRIBED,
+        payload: 'ready'
+      })
+    } else {
+      dispatch({
+        type: REPORT_ERROR_SUBSCRIPTION,
+        payload: 'failed'
+      })
+    }
+  })
+}
+
 export const subscribeChannel = (channelId) => async (dispatch) => {
   dispatch({
     type: WAIT_SUBSCRIPTION,
     payload: 'loading'
   })
   subscribeTo({
-    channelId: channelId,
+    channelId
   }).then((result) => {
     if(!result.error){
       dispatch({
