@@ -7,10 +7,9 @@ import { signIn, closeSignUpModal } from '../actions';
 
 
 class SignInModal extends Component {
-  componentWillUpdate(nextProps) {
-    return nextProps.signUpModal !== this.props.signUpModal;
-  }
-
+constructor(props){
+  super(props)
+}
   componentWillUpdate(nextProps) {
     if (nextProps.auth) {
       this.props.closeSignUpModal();
@@ -18,25 +17,27 @@ class SignInModal extends Component {
   }
 
   render() {
+    const { signUpModal, closeSignUpModal, signIn } =  this.props;
+
     return (
       <Modal
-        open={this.props.signUpModal}
-        onClose={this.props.closeSignUpModal}
+        open={signUpModal}
+        onClose={closeSignUpModal}
         size="small"
       >
         <Header icon="sign in" content="Sign Up for PingMe" textAlign="center" />
         <Modal.Content image>
-          <Modal.Description>
-            <Container textAlign="center">
-              <Header>Not using PingMe? Sign up, get alerts about things you'd love to hear about.</Header>
-              <Button color="red" size="big" onClick={this.props.signIn}>
+                <p>
+                  Not using PingMe? Sign up, get alerts about things you'd love to hear about.
+                </p>
+        </Modal.Content>
+        <Modal.Actions>
+            <Button color="red" size="big" onClick={signIn}>
                 <Icon name="google" />
                 {' '}
-Google Sign
-              </Button>
-            </Container>
-          </Modal.Description>
-        </Modal.Content>
+                Google Sign
+            </Button>
+        </Modal.Actions>
       </Modal>
     );
   }
