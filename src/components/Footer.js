@@ -20,10 +20,10 @@ const Footer = () => (
           </Grid.Column>
           <Grid.Column width={7}>
             <Header as="h4">
-                &copy; 2019 Ping Me
+                &copy; 2019 PingMe
             </Header>
             <p>
-                a place to explore notifications
+                connect with your industry
             </p>
           </Grid.Column>
         </Grid.Row>

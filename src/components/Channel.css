@@ -2,17 +2,3 @@
     margin-top: 1em !important;
     margin-bottom: 1em !important;
 }
-
-.header-image {
-    background-image: url('/img/pragati-maidan-events.jpg');
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-
-    min-height: 20em;
-    margin-top: 4em;
-    margin-bottom: 1em;
-}

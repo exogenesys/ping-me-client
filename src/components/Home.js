@@ -36,7 +36,7 @@ class HomePage extends Component {
           <Container text>
             <Header
               as='h1'
-              content='Ping Me'
+              content='PingMe'
               inverted
               className={'home-heading'}
               style={{
@@ -51,7 +51,7 @@ class HomePage extends Component {
             }}/>
             <Header
               as='h2'
-              content='a place to explore notifications'
+              content='connect with your industry'
               inverted
               className={'home-subheading'}
               style={{

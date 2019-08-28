@@ -57,7 +57,7 @@ class TopBar extends Component {
             <Container>
             <Menu.Item as='a' header onClick={() => this.goToHome()}>
                 {/* <Image size='mini' src='/public/img/nothing.png' style={{ marginRight: '1.5em' }} /> */}
-                Ping Me
+                PingMe
             </Menu.Item>
             <Menu.Menu position='right'>
                 {AccountButton}
