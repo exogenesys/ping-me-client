@@ -19,7 +19,7 @@ class ChannelCarousel extends Component {
 
       const carouselData = [
         {
-          title: 'Never miss any action happening at Pragati Maidan',
+          title: 'Never miss any action happening at Pragati Maidan & Expo Center, Noida',
           className: 'channel-slide-1'
         },
         {

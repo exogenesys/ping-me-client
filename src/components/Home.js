@@ -16,7 +16,7 @@ class HomePage extends Component {
       .context
       .router
       .history
-      .push('/channel/exhibitions-at-pragati-maidan')
+      .push('/channel/exhibitions-in-delhi-ncr')
   }
 
   render() {

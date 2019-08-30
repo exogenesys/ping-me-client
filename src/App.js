@@ -17,7 +17,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Route exact path="/" component={Home} />
-          <Route path="/channel/exhibitions-at-pragati-maidan" component={Channel}/>
+          <Route path="/channel/exhibitions-in-delhi-ncr" component={Channel}/>
           {/* <Route path="/app" component={requireAuth(ToDoList)} /> */}
         </div>
       </BrowserRouter>
