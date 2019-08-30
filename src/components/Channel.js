@@ -149,8 +149,6 @@ class Channel extends Component {
       </Button>
     )
 
-    const StickyContextRef = createRef()
-
     return (
       <Layout>
         <Container>
@@ -160,9 +158,10 @@ class Channel extends Component {
           <Grid stackable>
             <Grid.Row reversed>
             <Grid.Column computer={10} tablet={16} mobile={16}>
-              <Header size='huge'>Notify Me About the Exhibitions & Trade in Delhi NCR</Header>
+              <Header size='huge'>Get Notified About the Exhibitions & Trade in Delhi NCR</Header>
               <Responsive
-                {...Responsive.onlyMobile} {...Responsive.onlyTablet}>
+                minWidth={320}
+                maxWidth={991}>
                 {relevantNumbers}
                 {subscribeChannelButton}
               </Responsive>
