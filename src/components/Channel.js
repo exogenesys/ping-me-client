@@ -1,7 +1,7 @@
 import './Channel.css';
 
 import React, {Component, createRef} from 'react';
-import {Container, Grid, Header, Button, Label, List, Accordion, Icon, Statistic, Sticky, Ref, Responsive, Segment} from 'semantic-ui-react';
+import {Container, Grid, Header, Button, Menu, List, Accordion, Icon, Statistic, Sticky, Ref, Responsive, Segment} from 'semantic-ui-react';
 import ChannelCarousel from "./ChannelCarousel";
 import {connect} from 'react-redux';
 import Layout from './Layout';
@@ -10,6 +10,7 @@ import {openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState} 
 class Channel extends Component {
   constructor(props) {
     super(props);
+
 
     this.state = {
       channelId: 't9NNVbV2uBnMbLl1ZDIj',
@@ -54,6 +55,8 @@ class Channel extends Component {
 
 
   render() {
+
+    const contextRef = createRef()
 
     const { activeIndex } = this.state
 
@@ -156,10 +159,10 @@ class Channel extends Component {
         <Container>
           <Grid stackable>
             <Grid.Row reversed>
-            <Grid.Column width={10}>
+            <Grid.Column computer={10} tablet={16} mobile={16}>
               <Header size='huge'>Notify Me About the Exhibitions & Trade in Delhi NCR</Header>
               <Responsive
-              {...Responsive.onlyMobile}>
+                {...Responsive.onlyMobile} {...Responsive.onlyTablet}>
                 {relevantNumbers}
                 {subscribeChannelButton}
               </Responsive>
@@ -252,7 +255,7 @@ class Channel extends Component {
 
               </div>
             </Grid.Column>
-            <Grid.Column width={6}>
+            <Grid.Column computer={6} tablet={16} mobile={16}>
             <Responsive
               {...Responsive.onlyComputer}>
                 {relevantNumbers}
@@ -261,6 +264,11 @@ class Channel extends Component {
             </Grid.Column>
             </Grid.Row>
           </Grid>
+            <Grid stackable>
+              <Grid.Column  computer={10} tablet={16} mobile={16}>
+              {subscribeChannelButton}
+              </Grid.Column>
+           </Grid>
         </Container>
       </Layout>
     );
