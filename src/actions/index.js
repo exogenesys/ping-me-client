@@ -1,35 +1,12 @@
 import Noty from 'noty';
+import ReactGA from 'react-ga';
 import {
-  todosRef, authRef, provider, subscribeTo, unSubscribeTo, getSubscriptionData,
+  authRef, provider, subscribeTo, unSubscribeTo, getSubscriptionData,
 } from '../config/firebase';
 import {
-  FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED,
+  FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED,
 } from './types';
 import notyConfig from '../config/noty.config';
-import ReactGA from 'react-ga'
-
-export const addToDo = (newToDo, uid) => async () => {
-  todosRef
-    .child(uid)
-    .push()
-    .set(newToDo);
-};
-
-export const completeToDo = (completeToDoId, uid) => async () => {
-  todosRef
-    .child(uid)
-    .child(completeToDoId)
-    .remove();
-};
-
-export const fetchToDos = uid => async (dispatch) => {
-  todosRef.child(uid).on('value', (snapshot) => {
-    dispatch({
-      type: FETCH_TODOS,
-      payload: snapshot.val(),
-    });
-  });
-};
 
 export const fetchUser = () => (dispatch) => {
   authRef.onAuthStateChanged((user) => {
@@ -60,7 +37,7 @@ export const signIn = () => () => {
       ReactGA.event({
         category: 'auth',
         action: 'sign-in',
-        label: 'account'
+        label: 'account',
       });
     })
     .catch((error) => {
@@ -80,7 +57,7 @@ export const signOut = () => () => {
       ReactGA.event({
         category: 'auth',
         action: 'sign-out',
-        label: 'account'
+        label: 'account',
       });
     })
     .catch((error) => {
@@ -96,7 +73,7 @@ export const openSignUpModal = () => (dispatch) => {
   ReactGA.event({
     category: 'auth',
     action: 'open-sign-up-modal',
-    label: 'account'
+    label: 'account',
   });
 };
 
@@ -113,7 +90,7 @@ export const getChannelState = (channelId, isUserAuthenticated = null) => (dispa
     payload: 'loading',
   });
 
-  if(isUserAuthenticated){
+  if (isUserAuthenticated) {
     getSubscriptionData({
       channelId,
     }).then((result) => {
@@ -140,7 +117,6 @@ export const getChannelState = (channelId, isUserAuthenticated = null) => (dispa
       payload: 'ready',
     });
   }
-
 };
 
 export const subscribeChannel = channelId => async (dispatch) => {
@@ -160,7 +136,7 @@ export const subscribeChannel = channelId => async (dispatch) => {
       ReactGA.event({
         category: 'subscription',
         action: 'subscribe-successful',
-        label: 'channel'
+        label: 'channel',
       });
       dispatch({
         type: COMPLETE_SUBSCRIPTION,
@@ -175,7 +151,7 @@ export const subscribeChannel = channelId => async (dispatch) => {
       ReactGA.event({
         category: 'subscription',
         action: 'subscribe-unsuccessful',
-        label: 'channel'
+        label: 'channel',
       });
       dispatch({
         type: REPORT_ERROR_SUBSCRIPTION,
@@ -201,7 +177,7 @@ export const unSubscribeChannel = channelId => async (dispatch) => {
       ReactGA.event({
         category: 'subscription',
         action: 'unsubscribe-successful',
-        label: 'channel'
+        label: 'channel',
       });
       new Noty({
         ...notyConfig,
@@ -217,7 +193,7 @@ export const unSubscribeChannel = channelId => async (dispatch) => {
       ReactGA.event({
         category: 'subscription',
         action: 'unsubscribe-unsuccessful',
-        label: 'channel'
+        label: 'channel',
       });
       dispatch({
         type: REPORT_ERROR_SUBSCRIPTION,

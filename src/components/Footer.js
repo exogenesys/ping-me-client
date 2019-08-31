@@ -8,8 +8,8 @@ import {
 } from 'semantic-ui-react';
 
 const Footer = () => (
-  <Container className={'footer'}>
-  <Segment vertical>
+  <Container className="footer">
+    <Segment vertical>
       <Grid divided stackable>
         <Grid.Row>
           <Grid.Column width={3}>
@@ -28,7 +28,7 @@ const Footer = () => (
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Segment>  
+    </Segment>
   </Container>
 );
 

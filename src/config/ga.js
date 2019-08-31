@@ -1,12 +1,12 @@
 import ReactGA from 'react-ga';
 
 function init() {
-    ReactGA.initialize('UA-145894771-1', {
-        debug: true,
-        titleCase: false,
-    });
+  ReactGA.initialize('UA-145894771-1', {
+    debug: false,
+    titleCase: false,
+  });
 
-    console.log('init ga')
-} 
+  console.log('init ga');
+}
 
-export default { init }
+export default { init };

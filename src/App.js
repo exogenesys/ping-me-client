@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Channel from './components/Channel';
 import Home from './components/Home';
-import requireAuth from './components/auth/requireAuth';
 import { fetchUser } from './actions';
 
 class App extends Component {
@@ -17,8 +16,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Route exact path="/" component={Home} />
-          <Route path="/channel/exhibitions-in-delhi-ncr" component={Channel}/>
-          {/* <Route path="/app" component={requireAuth(ToDoList)} /> */}
+          <Route path="/channel/exhibitions-in-delhi-ncr" component={Channel} />
         </div>
       </BrowserRouter>
     );

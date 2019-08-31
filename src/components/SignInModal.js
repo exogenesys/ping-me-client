@@ -6,9 +6,10 @@ import { connect } from 'react-redux';
 import { signIn, closeSignUpModal } from '../actions';
 
 class SignInModal extends Component {
-constructor(props){
-  super(props)
-}
+  constructor(props) {
+    super(props);
+  }
+
   componentWillUpdate(nextProps) {
     if (nextProps.auth) {
       this.props.closeSignUpModal();
@@ -16,7 +17,7 @@ constructor(props){
   }
 
   render() {
-    const { signUpModal, closeSignUpModal, signIn } =  this.props;
+    const { signUpModal, closeSignUpModal, signIn } = this.props;
 
     return (
       <Modal
@@ -26,16 +27,16 @@ constructor(props){
       >
         <Header icon="sign in" content="Sign Up for PingMe" textAlign="center" />
         <Modal.Content image>
-                <p>
+          <p>
                   Not using PingMe? Sign up, get alerts about things you'd love to hear about.
-                </p>
+          </p>
         </Modal.Content>
         <Modal.Actions>
-            <Button color="red" size="big" onClick={signIn}>
-                <Icon name="google" />
-                {' '}
+          <Button color="red" size="big" onClick={signIn}>
+            <Icon name="google" />
+            {' '}
                 Log In with Google
-            </Button>
+          </Button>
         </Modal.Actions>
       </Modal>
     );
