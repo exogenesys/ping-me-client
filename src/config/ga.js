@@ -5,8 +5,6 @@ function init() {
     debug: false,
     titleCase: false,
   });
-
-  console.log('init ga');
 }
 
 export default { init };

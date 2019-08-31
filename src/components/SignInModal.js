@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Button, Header, Icon, Modal, Container,
+  Button, Header, Icon, Modal,
 } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { signIn, closeSignUpModal } from '../actions';
@@ -28,7 +28,7 @@ class SignInModal extends Component {
         <Header icon="sign in" content="Sign Up for PingMe" textAlign="center" />
         <Modal.Content image>
           <p>
-                  Not using PingMe? Sign up, get alerts about things you'd love to hear about.
+                  Not using PingMe? Sign up, get alerts about things you&apos;d love to hear about.
           </p>
         </Modal.Content>
         <Modal.Actions>
@@ -47,4 +47,8 @@ function mapStateToProps({ auth, signUpModal }) {
   return { auth, signUpModal };
 }
 
-export default connect(mapStateToProps, { signIn, closeSignUpModal }, null, { forwardRef: true })(SignInModal);
+export default connect(mapStateToProps, 
+  { 
+    signIn, 
+    closeSignUpModal 
+  }, null, { forwardRef: true })(SignInModal);

@@ -1,10 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
-import { Card } from 'semantic-ui-react';
 import './ChannelCarousel.css';
 
-class ChannelCarousel extends Component {
-  render() {
+const ChannelCarousel = () => {
     const settings = {
       dots: false,
       infinite: true,
@@ -36,8 +34,8 @@ class ChannelCarousel extends Component {
       },
     ];
 
-    const slides = carouselData.map(slideData => (
-      <div fluid className={`${slideData.className} ` + 'channel-slide'}>
+    const slides = carouselData.map((slideData, idx) => (
+      <div className={`${slideData.className} channel-slide`} key={idx}>
         <div className="channel-slide-content">
           <div className="channel-slide-title">
             {slideData.title}
@@ -53,7 +51,6 @@ class ChannelCarousel extends Component {
         </Slider>
       </div>
     );
-  }
 }
 
 export default ChannelCarousel;

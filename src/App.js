@@ -15,8 +15,8 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="container">
-          <Route exact path="/" component={Home} />
-          <Route path="/channel/exhibitions-in-delhi-ncr" component={Channel} />
+          <Route exact path="/" component={() => <Home/>} />
+          <Route path="/channel/exhibitions-in-delhi-ncr" component={() => <Channel/>} />
         </div>
       </BrowserRouter>
     );

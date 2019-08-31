@@ -3,7 +3,6 @@ import React, {Component} from "react";
 import {Container, Header, Button, Icon, Segment} from 'semantic-ui-react'
 import Layout from './Layout'
 import PropTypes from 'prop-types'
-import {connect} from "react-redux";
 import ReactGA from 'react-ga';
 
 class HomePage extends Component {

@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react'
+import React, { Component } from 'react'
 import { 
     Menu,
     Container,
@@ -56,7 +56,7 @@ class TopBar extends Component {
             <Menu fixed='top'>
             <Container>
             <Menu.Item as='a' header onClick={() => this.goToHome()}>
-                🎪&nbsp;&nbsp;PingMe
+                <span role='img' aria-label='circus'>🎪</span>&nbsp;&nbsp;PingMe
             </Menu.Item>
             <Menu.Menu position='right'>
                 {AccountButton}

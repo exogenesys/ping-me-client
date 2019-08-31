@@ -3,7 +3,7 @@
 import * as firebase from 'firebase/app';
 
 import 'firebase/auth';
-import 'firebase/functions'
+import 'firebase/functions';
 
 import FirebaseConfig from './keys';
 

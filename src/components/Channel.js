@@ -1,7 +1,7 @@
 import './Channel.css';
 
-import React, {Component, createRef} from 'react';
-import {Container, Grid, Header, Button, Menu, List, Accordion, Icon, Statistic, Sticky, Ref, Responsive, Segment} from 'semantic-ui-react';
+import React, {Component} from 'react';
+import {Container, Grid, Header, Button, List, Accordion, Icon, Statistic, Responsive} from 'semantic-ui-react';
 import ChannelCarousel from "./ChannelCarousel";
 import {connect} from 'react-redux';
 import Layout from './Layout';
@@ -28,7 +28,7 @@ class Channel extends Component {
   }
   
   componentWillUpdate(nextProps) {
-    if (this.props.auth != nextProps.auth) {
+    if (this.props.auth !== nextProps.auth) {
       this.props.getChannelState(this.state.channelId, nextProps.auth);
     }
   }
@@ -36,11 +36,11 @@ class Channel extends Component {
 
   handleRegister() {
     if (this.props.auth) {
-      if (this.props.subscription == 'ready' || !this.props.subscription) {
+      if (this.props.subscription === 'ready' || !this.props.subscription) {
         this
           .props
           .subscribeChannel(this.state.channelId);
-      } else if (this.props.subscription == 'complete') {
+      } else if (this.props.subscription === 'complete') {
         this
           .props
           .unSubscribeChannel(this.state.channelId);
@@ -61,26 +61,24 @@ class Channel extends Component {
 
   render() {
 
-    const contextRef = createRef()
-
     const { activeIndex } = this.state
 
     let ButtonText;
     let ButtonColor;
     let ButtonLoading;
-    if (this.props.subscription == 'complete') {
+    if (this.props.subscription === 'complete') {
       ButtonText = 'Cancel Subscription';
       ButtonColor = 'pink';
       ButtonLoading = false;
-    } else if (this.props.subscription == 'loading') {
+    } else if (this.props.subscription === 'loading') {
       ButtonText = 'Please Wait...';
       ButtonColor = 'grey';
       ButtonLoading = true;
-    } else if (this.props.subscription == 'error') {
+    } else if (this.props.subscription === 'error') {
       ButtonText = 'Something went wrong. Retry!';
       ButtonColor = 'red';
       ButtonLoading = false;
-    } else if (this.props.subscription == 'ready' || !this.props.subscription) {
+    } else if (this.props.subscription === 'ready' || !this.props.subscription) {
       ButtonText = 'Click to Subscribe for Notifications';
       ButtonColor = 'teal';
       ButtonLoading = false;
@@ -122,7 +120,7 @@ class Channel extends Component {
     ];
 
     const industryLists = industries.map((industryList) => {
-      return industryList.map(industry => <List.Item> {industry} </List.Item>
+      return industryList.map((industry, idx) => <List.Item key={idx}> {industry} </List.Item>
       )
     })
 
