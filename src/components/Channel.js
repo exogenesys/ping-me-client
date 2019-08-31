@@ -159,8 +159,8 @@ class Channel extends Component {
           <ChannelCarousel/>
         </Container>
         <Container>
-          <Grid stackable>
-            <Grid.Row reversed>
+          <Grid>
+            <Grid.Row>
             <Grid.Column computer={10} tablet={16} mobile={16}>
               <Header size='huge' className={'channel-title'}>Get Notified About the Exhibitions & Trade in Delhi NCR</Header>
               <Responsive
@@ -181,7 +181,7 @@ class Channel extends Component {
                   </p>
 
                   <Header as='h2'>
-                  Here are seven reasons why your startup shouldn’t ignore the power of trade shows:
+                  Here are seven reasons why your startup shouldn’t ignore the power of trade shows & subscribe to the notifications:
                   </Header>
 
                   <Header as='h3'>
@@ -253,13 +253,13 @@ class Channel extends Component {
 
               </div>
             </Grid.Column>
+            <Grid.Column computer={6} tablet={16} mobile={16}>
             <Responsive
-              {...Responsive.onlyComputer}>
-                <Grid.Column computer={6} tablet={16} mobile={16}>
+              minWidth={992}>
                 {relevantNumbers}
                 {subscribeChannelButton}
-                </Grid.Column>
               </Responsive>
+                </Grid.Column>
             </Grid.Row>
           </Grid>
             <Grid stackable>

@@ -15,6 +15,7 @@ class ChannelCarousel extends Component {
         autoplay: true,
         fade: true,
         swipeToSlide: true,
+        arrows: false,
       }
 
       const carouselData = [
