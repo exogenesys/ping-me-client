@@ -151,7 +151,7 @@ export const subscribeChannel = channelId => async (dispatch) => {
   subscribeTo({
     channelId,
   }).then((result) => {
-    if (!result.error) {
+    if (!result.error && !result) {
       new Noty({
         ...notyConfig,
         text: 'Channel Subscribed',
@@ -193,7 +193,7 @@ export const unSubscribeChannel = channelId => async (dispatch) => {
   unSubscribeTo({
     channelId,
   }).then((result) => {
-    if (!result.error) {
+    if (!result.error && !result) {
       dispatch({
         type: COMPLETE_SUBSCRIPTION,
         payload: 'ready',
