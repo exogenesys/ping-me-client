@@ -26,17 +26,11 @@ class HomePage extends Component {
 
   render() {
 
-    const mobile = false;
-
     return (
       <Layout>
         <Segment
           textAlign='center'
-          style={{
-          minHeight: 700,
-          padding: '1em 0em'
-        }}
-          vertical
+           vertical
           className={'home-image'}>
           <Container text>
             <Header
@@ -44,31 +38,14 @@ class HomePage extends Component {
               content='PingMe'
               inverted
               className={'home-heading'}
-              style={{
-              fontSize: mobile
-                ? '2em'
-                : '4em',
-              fontWeight: 'normal',
-              marginBottom: 0,
-              marginTop: mobile
-                ? '1.5em'
-                : '3em'
-            }}/>
+              />
             <Header
               as='h2'
               content='connect with your industry'
               inverted
               className={'home-subheading'}
-              style={{
-              fontSize: mobile
-                ? '1.5em'
-                : '1.7em',
-              fontWeight: 'normal',
-              marginTop: mobile
-                ? '0.5em'
-                : '1.5em'
-            }}/>
-            <Button primary size='huge' onClick={() => this.getStarted()}>
+             />
+            <Button primary size='huge' className={'home-get-started-button'} onClick={() => this.getStarted()}>
               Get Started
               <Icon name='right arrow'/>
             </Button>
