@@ -4,6 +4,7 @@ import {Container, Header, Button, Icon, Segment} from 'semantic-ui-react'
 import Layout from './Layout'
 import PropTypes from 'prop-types'
 import {connect} from "react-redux";
+import ReactGA from 'react-ga';
 
 class HomePage extends Component {
 
@@ -17,6 +18,10 @@ class HomePage extends Component {
       .router
       .history
       .push('/channel/exhibitions-in-delhi-ncr')
+  }
+
+  componentDidMount(){
+    ReactGA.pageview('/');
   }
 
   render() {

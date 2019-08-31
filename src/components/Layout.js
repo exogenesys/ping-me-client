@@ -5,16 +5,18 @@ import Footer from './Footer'
 import SignInModal from './SignInModal'
 import PropTypes from 'prop-types'
 import { connect } from "react-redux";
-
+import GA from '../config/ga';
 
 class Layout extends Component {
 
   state = {}
 
+  componentDidMount(){
+    GA.init();
+  }
 
   render() {
     const { children } = this.props
-
 
     return (
         <div className={'site'}>

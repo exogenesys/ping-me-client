@@ -6,6 +6,7 @@ import {
   FETCH_TODOS, FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED,
 } from './types';
 import notyConfig from '../config/noty.config';
+import ReactGA from 'react-ga'
 
 export const addToDo = (newToDo, uid) => async () => {
   todosRef
@@ -37,6 +38,7 @@ export const fetchUser = () => (dispatch) => {
         type: FETCH_USER,
         payload: user,
       });
+      ReactGA.set({ userId: user.uid });
     } else {
       dispatch({
         type: FETCH_USER,
@@ -55,6 +57,11 @@ export const signIn = () => () => {
         text: 'Hello, there!',
         type: 'success',
       }).show();
+      ReactGA.event({
+        category: 'auth',
+        action: 'sign-in',
+        label: 'account'
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -70,6 +77,11 @@ export const signOut = () => () => {
         text: 'Succesfully logged out',
         type: 'alert',
       }).show();
+      ReactGA.event({
+        category: 'auth',
+        action: 'sign-out',
+        label: 'account'
+      });
     })
     .catch((error) => {
       console.log(error);
@@ -80,6 +92,11 @@ export const openSignUpModal = () => (dispatch) => {
   dispatch({
     type: OPEN_SIGN_UP_MODAL,
     payload: true,
+  });
+  ReactGA.event({
+    category: 'auth',
+    action: 'open-sign-up-modal',
+    label: 'account'
   });
 };
 
@@ -140,6 +157,11 @@ export const subscribeChannel = channelId => async (dispatch) => {
         text: 'Channel Subscribed',
         type: 'success',
       }).show();
+      ReactGA.event({
+        category: 'subscription',
+        action: 'subscribe-successful',
+        label: 'channel'
+      });
       dispatch({
         type: COMPLETE_SUBSCRIPTION,
         payload: 'complete',
@@ -150,6 +172,11 @@ export const subscribeChannel = channelId => async (dispatch) => {
         text: 'Some Error Occured',
         type: 'error',
       }).show();
+      ReactGA.event({
+        category: 'subscription',
+        action: 'subscribe-unsuccessful',
+        label: 'channel'
+      });
       dispatch({
         type: REPORT_ERROR_SUBSCRIPTION,
         payload: 'failed',
@@ -171,6 +198,11 @@ export const unSubscribeChannel = channelId => async (dispatch) => {
         type: COMPLETE_SUBSCRIPTION,
         payload: 'ready',
       });
+      ReactGA.event({
+        category: 'subscription',
+        action: 'unsubscribe-successful',
+        label: 'channel'
+      });
       new Noty({
         ...notyConfig,
         text: 'Channel Unsubscribed',
@@ -182,6 +214,11 @@ export const unSubscribeChannel = channelId => async (dispatch) => {
         text: 'Some Error Occured',
         type: 'error',
       }).show();
+      ReactGA.event({
+        category: 'subscription',
+        action: 'unsubscribe-unsuccessful',
+        label: 'channel'
+      });
       dispatch({
         type: REPORT_ERROR_SUBSCRIPTION,
         payload: 'failed',

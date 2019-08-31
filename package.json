@@ -11,6 +11,7 @@
     "noty": "^3.2.0-beta",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-ga": "^2.6.0",
     "react-redux": "^7.1.0",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",

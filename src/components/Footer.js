@@ -8,8 +8,8 @@ import {
 } from 'semantic-ui-react';
 
 const Footer = () => (
-  <Segment vertical style={{ padding: '5em 0em' }}>
-    <Container>
+  <Container className={'footer'}>
+  <Segment vertical>
       <Grid divided stackable>
         <Grid.Row>
           <Grid.Column width={3}>
@@ -28,8 +28,8 @@ const Footer = () => (
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Container>
-  </Segment>
+    </Segment>  
+  </Container>
 );
 
 export default Footer;

@@ -4,10 +4,12 @@ import { connect } from "react-redux";
 import { signIn } from "../actions";
 import PropTypes from "prop-types";
 
+
 class Signin extends Component {
   static contextTypes = {
     router: PropTypes.object
   };
+
 
   componentWillUpdate(nextProps) {
     if (nextProps.auth) {

@@ -5,7 +5,6 @@ import {
 import { connect } from 'react-redux';
 import { signIn, closeSignUpModal } from '../actions';
 
-
 class SignInModal extends Component {
 constructor(props){
   super(props)

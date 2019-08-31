@@ -6,22 +6,27 @@ import ChannelCarousel from "./ChannelCarousel";
 import {connect} from 'react-redux';
 import Layout from './Layout';
 import {openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState} from '../actions';
+import ReactGA from 'react-ga';
+
 
 class Channel extends Component {
   constructor(props) {
     super(props);
 
-
+    
     this.state = {
       channelId: 't9NNVbV2uBnMbLl1ZDIj',
       activeIndex: -1
     };
-
+    
     if (this.props.auth) {
-        this.props.getChannelState(this.state.channelId, this.props.auth);
-      }
+      this.props.getChannelState(this.state.channelId, this.props.auth);
     }
-
+  }
+  componentDidMount(){
+    ReactGA.pageview('/channel/exhibitions-in-delhi-ncr');
+  }
+  
   componentWillUpdate(nextProps) {
     if (this.props.auth != nextProps.auth) {
       this.props.getChannelState(this.state.channelId, nextProps.auth);
@@ -93,18 +98,17 @@ class Channel extends Component {
       'Food & Beverages',
       'Wellness, Health & Fitness',
       'Entertainment & Media',
-    ], [
       'Agriculture & Forestry',
       'Building & Construction',
       'Fashion & Beauty',
       'Apparel & Clothing',
       'Banking & Finance',
+    ], [
       'Auto & Automotive',
       'Power & Energy',
       'Environment & Waste',
       'Logistics & Transportation',
-      'Electric & Electronics'
-    ], [
+      'Electric & Electronics',
       'Home & Office',
       'Security & Defense',
       'Travel & Tourism',
@@ -123,17 +127,17 @@ class Channel extends Component {
     })
 
     const relevantNumbers = (
-      <Grid columns='equal' centered className={'relevantNumbers'}> 
+      <Grid columns='equal' centered className={'relevant-numbers'}> 
         <Grid.Column textAlign='center'>
-        <Statistic>
-          <Statistic.Value>2</Statistic.Value>
-          <Statistic.Label>Emails Per Month</Statistic.Label>
+        <Statistic horizontal size={'small'}>
+          <Statistic.Value>1.4k</Statistic.Value>
+          <Statistic.Label>Number of Subscibers</Statistic.Label>
         </Statistic>
         </Grid.Column>
         <Grid.Column textAlign='center'>
-        <Statistic>
-          <Statistic.Value>550</Statistic.Value>
-          <Statistic.Label>Number of Subscibers</Statistic.Label>
+        <Statistic horizontal size={'small'}>
+          <Statistic.Value>2</Statistic.Value>
+          <Statistic.Label>Emails Per Month</Statistic.Label>
         </Statistic>
         </Grid.Column>
       </Grid>
@@ -158,7 +162,7 @@ class Channel extends Component {
           <Grid stackable>
             <Grid.Row reversed>
             <Grid.Column computer={10} tablet={16} mobile={16}>
-              <Header size='huge'>Get Notified About the Exhibitions & Trade in Delhi NCR</Header>
+              <Header size='huge' className={'channel-title'}>Get Notified About the Exhibitions & Trade in Delhi NCR</Header>
               <Responsive
                 minWidth={320}
                 maxWidth={991}>
@@ -168,23 +172,23 @@ class Channel extends Component {
               <div className="channel-content">
                 <div className={'channel-discription'}>
 
-                  <p className={'channel-discrption-para'}>
+                  <p className={'channel-discription-para'}>
                     I know what you’re thinking—trade shows?! How old school. With endless rows of booths, stacks of pamphlets, and thousands of people crowding the aisles, trade shows don’t exactly have a reputation for being trendy.
                   </p>
 
-                  <p className={'channel-discrption-para'}>
+                  <p className={'channel-discription-para'}>
                   When employees attend trade shows, morale is boosted, new contacts are made, skills are improved through educational seminars, and hopefully, sales leads are generated. 
                   </p>
 
-                  <p className={'channel-discrption-para'}>
+                  <Header as='h2'>
                   Here are seven reasons why your startup shouldn’t ignore the power of trade shows:
-                  </p>
+                  </Header>
 
                   <Header as='h3'>
                   Forge business relationships
                   </Header> 
 
-                  <p className={'channel-discrption-para'}>
+                  <p className={'channel-discription-para'}>
                   Turn on that trade show charm and build new relationships that exist offline. Trade show floors are flooded with CEOs, C-suite executives, investors, and customers. You never know the power of one great new contact, so remember to engage in meaningful conversations with everyone you meet.
                   </p>
 
@@ -192,7 +196,7 @@ class Channel extends Component {
                   Highly targeted leads
                   </Header> 
 
-                  <p className={'channel-discrption-para'}>
+                  <p className={'channel-discription-para'}>
                   A pre-qualified customer is one who has traveled, spent money, brought a friend, or made an actionable investment to participate. Trade shows are swarming with people who have opted into the experience, and 84% of them have the power to recommend, specify and/or make real purchasing decisions. The trade show floor is the ideal place to engage with customers who actually care about learning more about the companies that are exhibiting.
                   </p>
 
@@ -200,7 +204,7 @@ class Channel extends Component {
                   Competitor analysis
                   </Header> 
 
-                  <p className={'channel-discrption-para'}>
+                  <p className={'channel-discription-para'}>
                   As trade shows offer a great opportunity to introduce new products and services, you also can use the experience to become more aware of how your competitors are positioning their products. Also, it’s important to be at the same shows as your competition in order to be considered a viable alternative for potential customers.
                   </p>
 
@@ -208,7 +212,7 @@ class Channel extends Component {
                   Getting a lot of people to use your product
                   </Header> 
 
-                  <p className={'channel-discrption-para'}>
+                  <p className={'channel-discription-para'}>
                   Watch and learn, literally. Trade shows offer a unique opportunity for you to see how attendees interact with your product and hear the questions they ask, so you can get a deeper understanding of your ideal customer. Use the trade show experience to gain insight into new features to add to your product, to see how your customers use your product, and to get valuable testimonials and feedback.
                   </p>
 
@@ -216,7 +220,7 @@ class Channel extends Component {
                   Raise Brand Awareness
                   </Header> 
 
-                  <p className={'channel-discrption-para'}>
+                  <p className={'channel-discription-para'}>
                   Industry influences and bloggers walk trade show floors to gain insight into the best, brightest, and most up-and-coming companies and trends. Cold emails to influences may never be opened, but an interesting booth and a clever sales hook may spark a genuine conversation with a press representative, giving you an even higher return on your marketing spend than you imagined.
                   </p>
                 </div>
@@ -232,20 +236,15 @@ class Channel extends Component {
                   </Header>
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex === 0}>
-                    <Grid>
-                      <Grid.Column width={4}>
+                    <Grid columns={2}>
+                      <Grid.Column>
                       <List relaxed >
                         {industryLists[0]}
                       </List>
                       </Grid.Column>
-                      <Grid.Column width={4}>
+                      <Grid.Column>
                       <List relaxed>
                         {industryLists[1]}
-                      </List>
-                      </Grid.Column>
-                      <Grid.Column width={4}>
-                      <List relaxed>
-                        {industryLists[2]}
                       </List>
                       </Grid.Column>
                     </Grid>
@@ -254,13 +253,13 @@ class Channel extends Component {
 
               </div>
             </Grid.Column>
-            <Grid.Column computer={6} tablet={16} mobile={16}>
             <Responsive
               {...Responsive.onlyComputer}>
+                <Grid.Column computer={6} tablet={16} mobile={16}>
                 {relevantNumbers}
                 {subscribeChannelButton}
+                </Grid.Column>
               </Responsive>
-            </Grid.Column>
             </Grid.Row>
           </Grid>
             <Grid stackable>
