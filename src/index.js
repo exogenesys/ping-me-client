@@ -11,6 +11,9 @@ import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
+import Sentry from './config/sentry';
+
+Sentry.init();
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 
