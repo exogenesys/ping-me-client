@@ -4,7 +4,14 @@ import {
   authRef, provider, subscribeTo, unSubscribeTo, getSubscriptionData,
 } from '../config/firebase';
 import {
-  FETCH_USER, OPEN_SIGN_UP_MODAL, CLOSE_SIGN_UP_MODAL, COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED,
+  FETCH_USER, 
+  OPEN_SIGN_UP_MODAL, 
+  CLOSE_SIGN_UP_MODAL,
+  ALREADY_SUBSCRIBED, 
+  SUCCESSFUL_SUBSCRIPTION, 
+  WAIT_SUBSCRIPTION, 
+  REPORT_ERROR_SUBSCRIPTION, 
+  NOT_SUBSCRIBED,
 } from './types';
 import notyConfig from '../config/noty.config';
 
@@ -65,6 +72,7 @@ export const signOut = () => () => {
     });
 };
 
+
 export const openSignUpModal = () => (dispatch) => {
   dispatch({
     type: OPEN_SIGN_UP_MODAL,
@@ -96,8 +104,8 @@ export const getChannelState = (channelId, isUserAuthenticated = null) => (dispa
     }).then((result) => {
       if (!result.data.error && result.data.message === 'subscribed') {
         dispatch({
-          type: COMPLETE_SUBSCRIPTION,
-          payload: 'complete',
+          type: ALREADY_SUBSCRIBED,
+          payload: 'already',
         });
       } else if (!result.data.error && result.data.message === 'not subscribed') {
         dispatch({
@@ -127,20 +135,15 @@ export const subscribeChannel = channelId => async (dispatch) => {
   subscribeTo({
     channelId,
   }).then((result) => {
-    if (!result.error && !result) {
-      new Noty({
-        ...notyConfig,
-        text: 'Channel Subscribed',
-        type: 'success',
-      }).show();
+    if (!result.error && result !== null) {
+      dispatch({
+        type: SUCCESSFUL_SUBSCRIPTION,
+        payload: 'successful'
+      })
       ReactGA.event({
         category: 'subscription',
         action: 'subscribe-successful',
         label: 'channel',
-      });
-      dispatch({
-        type: COMPLETE_SUBSCRIPTION,
-        payload: 'complete',
       });
     } else {
       new Noty({
@@ -169,9 +172,9 @@ export const unSubscribeChannel = channelId => async (dispatch) => {
   unSubscribeTo({
     channelId,
   }).then((result) => {
-    if (!result.error && !result) {
+    if (!result.error && result !== null) {
       dispatch({
-        type: COMPLETE_SUBSCRIPTION,
+        type: NOT_SUBSCRIBED,
         payload: 'ready',
       });
       ReactGA.event({
@@ -202,3 +205,4 @@ export const unSubscribeChannel = channelId => async (dispatch) => {
     }
   });
 };
+

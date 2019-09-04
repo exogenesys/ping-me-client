@@ -7,6 +7,7 @@ import {connect} from 'react-redux';
 import Layout from './Layout';
 import {openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState} from '../actions';
 import ReactGA from 'react-ga';
+import SuccessModal from './SuccessModal';
 
 
 class Channel extends Component {
@@ -40,7 +41,7 @@ class Channel extends Component {
         this
           .props
           .subscribeChannel(this.state.channelId);
-      } else if (this.props.subscription === 'complete') {
+      } else if (this.props.subscription === 'successful' || this.props.subscription === 'already') {
         this
           .props
           .unSubscribeChannel(this.state.channelId);
@@ -58,7 +59,6 @@ class Channel extends Component {
     this.setState({ activeIndex: newIndex })
   }
 
-
   render() {
 
     const { activeIndex } = this.state
@@ -66,11 +66,15 @@ class Channel extends Component {
     let ButtonText;
     let ButtonColor;
     let ButtonLoading;
-    if (this.props.subscription === 'complete') {
+    if (this.props.subscription === 'already') {
       ButtonText = 'Cancel Subscription';
       ButtonColor = 'pink';
       ButtonLoading = false;
-    } else if (this.props.subscription === 'loading') {
+    } else if(this.props.subscription === 'successful'){
+      ButtonText = 'Cancel Subscription';
+      ButtonColor = 'pink';
+      ButtonLoading = false;
+    }else if (this.props.subscription === 'loading') {
       ButtonText = 'Please Wait...';
       ButtonColor = 'grey';
       ButtonLoading = true;
@@ -154,9 +158,8 @@ class Channel extends Component {
     return (
       <Layout>
         <Container>
+          <SuccessModal/>
           <ChannelCarousel/>
-        </Container>
-        <Container>
           <Grid>
             <Grid.Row>
             <Grid.Column computer={10} tablet={16} mobile={16}>
@@ -273,4 +276,11 @@ class Channel extends Component {
 
 const mapStateToProps = ({auth, subscription}) => ({auth, subscription});
 
-export default connect(mapStateToProps, {openSignUpModal, subscribeChannel, unSubscribeChannel, getChannelState})(Channel);
+export default connect(mapStateToProps, 
+  {
+    openSignUpModal, 
+    subscribeChannel, 
+    unSubscribeChannel, 
+    getChannelState,
+
+  })(Channel);

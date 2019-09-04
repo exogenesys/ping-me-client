@@ -1,10 +1,12 @@
 import {
-  COMPLETE_SUBSCRIPTION, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED,
+  SUCCESSFUL_SUBSCRIPTION, ALREADY_SUBSCRIBED, WAIT_SUBSCRIPTION, REPORT_ERROR_SUBSCRIPTION, NOT_SUBSCRIBED,
 } from '../actions/types';
 
 export default (state = null, action) => {
   switch (action.type) {
-    case COMPLETE_SUBSCRIPTION:
+    case SUCCESSFUL_SUBSCRIPTION:
+      return action.payload;
+    case ALREADY_SUBSCRIBED:
       return action.payload;
     case WAIT_SUBSCRIPTION:
       return action.payload;
