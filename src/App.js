@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Channel from './components/Channel';
 import Home from './components/Home';
@@ -16,7 +16,8 @@ class App extends Component {
       <BrowserRouter>
         <div className="container">
           <Route exact path="/" component={() => <Home/>} />
-          <Route path="/channel/exhibitions-in-delhi-ncr" component={() => <Channel/>} />
+          <Route exact path="/channel/exhibitions-in-delhi-ncr" component={() => <Channel/>} />
+          <Route render={() => <Redirect to="/channel/exhibitions-in-delhi-ncr" />} />
         </div>
       </BrowserRouter>
     );
